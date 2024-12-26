@@ -32,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    kotlin {
+        jvmToolchain(8)
+    }
     
     namespace "yukams.app.background_locator_2"
     compileSdkVersion 29
@@ -45,6 +49,12 @@ android {
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
