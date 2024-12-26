@@ -1,61 +1,61 @@
 buildscript {
-   ext {
-       kotlin_version = '1.8.22'
-       gradle_version = '8.1.2'
-   }
-   repositories {
-       google()
-       mavenCentral()
-   }
-   dependencies {
-       classpath 'com.android.tools.build:gradle:8.1.2'
-       classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-   }
+    ext {
+        kotlin_version = '1.8.22' // Or the version you are using in the main project
+        gradle_version = '8.1.2' // Or the version you are using
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
 rootProject.allprojects {
-   repositories {
-       google()
-       mavenCentral()
-   }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 kotlin {
-   jvmToolchain(17)
+    jvmToolchain(8) // Changed from 17
 }
 
 android {
-   namespace "yukams.app.background_locator_2"
-   compileSdk 34
-   
-   defaultConfig {
-       minSdk 19
-       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-   }
+    namespace "yukams.app.background_locator_2" // Keep the same namespace
+    compileSdk 34
 
-   tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-       kotlinOptions {
-           jvmTarget = '17'
-       }
-   }
+    defaultConfig {
+        minSdk 19
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-   compileOptions {
-       sourceCompatibility JavaVersion.VERSION_17
-       targetCompatibility JavaVersion.VERSION_17
-   }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = '1.8' // Changed from '17'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 // Changed from VERSION_17
+        targetCompatibility JavaVersion.VERSION_1_8 // Changed from VERSION_17
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-   sourceCompatibility = JavaVersion.VERSION_17
-   targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8 // Changed from VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8 // Changed from VERSION_17
 }
 
 dependencies {
-   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-   implementation "com.google.android.gms:play-services-location:21.0.1"
-   implementation 'com.google.code.gson:gson:2.8.6'
-   implementation 'com.google.android.material:material:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.google.android.gms:play-services-location:21.0.1"
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.android.material:material:1.0.0'
 }
