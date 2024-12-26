@@ -2,74 +2,47 @@ group 'yukams.app.background_locator_2'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.22'
-    repositories {
-        google()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+   repositories {
+       google()
+       mavenCentral()
+   }
+   dependencies {
+       classpath 'com.android.tools.build:gradle:8.5.0'
+   }
 }
 
 rootProject.allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+   repositories {
+       google()
+       mavenCentral()
+   }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+   namespace "yukams.app.background_locator_2"
+   compileSdk 34
+   
+   defaultConfig {
+       minSdk 19
+       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+   }
 
-    kotlin {
-        jvmToolchain(8)
-    }
-    
-    namespace "yukams.app.background_locator_2"
-    compileSdkVersion 29
+   compileOptions {
+       sourceCompatibility 1.8
+       targetCompatibility 1.8
+   }
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-    defaultConfig {
-        minSdkVersion 19
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-}
-
-kotlin {
-    jvmToolchain(8)
-}
-
-tasks.withType(JavaCompile).all {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+   kotlinOptions {
+       jvmTarget = '1.8'
+   }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.android.gms:play-services-location:21.0.1"
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.google.android.material:material:1.0.0'
+   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+   implementation "com.google.android.gms:play-services-location:21.0.1"
+   implementation 'com.google.code.gson:gson:2.8.6'
+   implementation 'com.google.android.material:material:1.0.0'
 }
