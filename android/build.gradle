@@ -2,59 +2,56 @@ group 'yukams.app.background_locator_2'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+   repositories {
+       google()
+       mavenCentral()
+   }
+   dependencies {
+       classpath 'com.android.tools.build:gradle:8.1.2'
+       classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+   }
 }
 
 rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+   repositories {
+       google()
+       mavenCentral()
+   }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 kotlin {
-    jvmToolchain(17)
+   jvmToolchain(17)
 }
 
 android {
-    namespace "yukams.app.background_locator_2"
-    compileSdk 34
-    
-    defaultConfig {
-        minSdk 19
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+   namespace "yukams.app.background_locator_2"
+   compileSdk 34
+   
+   defaultConfig {
+       minSdk 19
+       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+   }
 
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions {
-            jvmTarget = '17'
-        }
-    }
+   tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+       kotlinOptions {
+           jvmTarget = '17'
+       }
+   }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
+   compileOptions {
+       sourceCompatibility JavaVersion.VERSION_17
+       targetCompatibility JavaVersion.VERSION_17
+   }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+   sourceCompatibility = JavaVersion.VERSION_17
+   targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "com.google.android.gms:play-services-location:21.0.1"
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.google.android.material:material:1.0.0'
-}
+   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+   implementation "com.google.android.gms:play-services-location:21.0.1"
