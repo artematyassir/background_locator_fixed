@@ -27,7 +27,7 @@ plugins {
 
 android {
     namespace "yukams.app.background_locator"
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         minSdk 19
