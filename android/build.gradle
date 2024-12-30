@@ -1,19 +1,4 @@
 buildscript {
-    ext {
-        kotlin_version = '1.9.22' // Updated to latest stable
-        gradle_version = '8.2.0'  // Updated to match your main project
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
@@ -26,12 +11,12 @@ plugins {
 }
 
 android {
-    namespace "yukams.app.background_locator"
-    compileSdk 33
+    namespace "yukams.app.background_locator_2"  // Make sure this matches with your references
+    compileSdk 34  // Updated to latest
 
     defaultConfig {
-        minSdk 19
-        targetSdkVersion 33
+        minSdk 23
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -44,12 +29,6 @@ android {
         jvmTarget = '1.8'
     }
 
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions {
-            jvmTarget = '1.8'
-        }
-    }
-
     // Add configuration for resolving conflicts
     configurations.all {
         resolutionStrategy {
@@ -60,10 +39,10 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22"
     implementation "com.google.android.gms:play-services-location:21.0.1"
-    implementation 'com.google.code.gson:gson:2.10.1'  // Updated to latest stable
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'androidx.core:core:1.9.0'
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'com.google.android.material:material:1.11.0'  // Updated to latest stable
+    implementation 'com.google.android.material:material:1.11.0'
 }
