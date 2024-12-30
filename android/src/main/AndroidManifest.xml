@@ -8,13 +8,13 @@
 
     <application>
         <service
-            android:name=".IsolateHolderService"
+            android:name="yukams.app.background_locator_2.IsolateHolderService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />
 
         <receiver
-            android:name=".BootBroadcastReceiver"
+            android:name="yukams.app.background_locator_2.BootBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
