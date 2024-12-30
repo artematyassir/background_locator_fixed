@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlin_version = '1.8.22' // Or the version you are using in the main project
-        gradle_version = '8.1.2' // Or the version you are using
+        kotlin_version = '1.9.22' // Updated to latest stable
+        gradle_version = '8.2.0'  // Updated to match your main project
     }
     repositories {
         google()
@@ -20,15 +20,13 @@ rootProject.allprojects {
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-
-kotlin {
-    jvmToolchain(8) // Changed from 17
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
 }
 
 android {
-    namespace "yukams.app.background_locator_2" // Keep the same namespace
+    namespace "yukams.app.background_locator_2"
     compileSdk 34
 
     defaultConfig {
@@ -36,26 +34,35 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
-            jvmTarget = '1.8' // Changed from '17'
+            jvmTarget = '1.8'
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8 // Changed from VERSION_17
-        targetCompatibility JavaVersion.VERSION_1_8 // Changed from VERSION_17
+    // Add configuration for resolving conflicts
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.core:core:1.9.0'
+            force 'androidx.core:core-ktx:1.9.0'
+        }
     }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    sourceCompatibility = JavaVersion.VERSION_1_8 // Changed from VERSION_17
-    targetCompatibility = JavaVersion.VERSION_1_8 // Changed from VERSION_17
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "com.google.android.gms:play-services-location:21.0.1"
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.code.gson:gson:2.10.1'  // Updated to latest stable
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'  // Updated to latest stable
 }
