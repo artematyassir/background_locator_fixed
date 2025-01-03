@@ -8,7 +8,7 @@ import java.util.HashMap
 
 class LocationParserUtil {
     companion object {
-        fun getLocationMapFromLocation(location: Location): HashMap<Any, Any?>? {
+        fun getLocationMapFromLocation(location: Location): HashMap<Any, Any?> {
             var speedAccuracy = 0f
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 speedAccuracy = location.speedAccuracyMetersPerSecond
@@ -18,7 +18,7 @@ class LocationParserUtil {
                 isMocked = location.isFromMockProvider
             }
 
-            return hashMapOf<Any, Any?>?(
+            return hashMapOf<Any, Any?>(
             Keys.ARG_IS_MOCKED to isMocked,
             Keys.ARG_LATITUDE to location.latitude,
             Keys.ARG_LONGITUDE to location.longitude,
@@ -32,7 +32,7 @@ class LocationParserUtil {
             )
         }
 
-        fun getLocationMapFromLocation(location: LocationResult?): HashMap<Any, Any?>? {
+        fun getLocationMapFromLocation(location: LocationResult?): HashMap<Any, Any>? {
             val firstLocation = location?.lastLocation ?: return null
 
             var speedAccuracy = 0f
@@ -44,7 +44,7 @@ class LocationParserUtil {
                 isMocked = firstLocation.isFromMockProvider
             }
 
-            return hashMapOf<Any, Any?>?(
+            return hashMapOf<Any, Any?>(
             Keys.ARG_IS_MOCKED to isMocked,
             Keys.ARG_LATITUDE to firstLocation.latitude,
             Keys.ARG_LONGITUDE to firstLocation.longitude,
