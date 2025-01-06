@@ -10,7 +10,7 @@ plugins {
     id 'kotlin-android'
 }
 
-ext.kotlin_version = '1.9.22' // Align with kotlin-stdlib version
+ext.kotlin_version = '1.8.21' // Aligning Kotlin version with stdlib
 
 android {
     namespace "yukams.app.background_locator_2"
@@ -30,10 +30,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // Configure JVM Toolchain
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(8)
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            // Add explicit versions to avoid conflicts
+            force 'androidx.core:core:1.9.0'
+            force 'androidx.core:core-ktx:1.9.0'
+        }
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21" // Align stdlib version
     implementation "com.google.android.gms:play-services-location:21.0.1"
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'androidx.core:core:1.9.0'
@@ -41,7 +56,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
 }
 
-// Enforce JVM compatibility for all Kotlin and Java tasks
+// Enforce JVM compatibility across all tasks
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -51,4 +66,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
 tasks.withType(JavaCompile).configureEach {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+// Debugging for JVM targets
+tasks.withType(JavaCompile).configureEach {
+    println("JavaCompile task: ${name}, sourceCompatibility: ${sourceCompatibility}, targetCompatibility: ${targetCompatibility}")
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    println("KotlinCompile task: ${name}, jvmTarget: ${kotlinOptions.jvmTarget}")
 }
