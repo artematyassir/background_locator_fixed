@@ -10,11 +10,11 @@ plugins {
     id 'kotlin-android'
 }
 
-ext.kotlin_version = '1.8.10'
+ext.kotlin_version = '1.9.22' // Align with kotlin-stdlib version
 
 android {
-    namespace "yukams.app.background_locator_2"  // Make sure this matches with your references
-    compileSdk 34  // Updated to latest
+    namespace "yukams.app.background_locator_2"
+    compileSdk 34
 
     defaultConfig {
         minSdk 23
@@ -30,14 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    // Add configuration for resolving conflicts
-    configurations.all {
-        resolutionStrategy {
-            force 'androidx.core:core:1.9.0'
-            force 'androidx.core:core-ktx:1.9.0'
-        }
-    }
 }
 
 dependencies {
@@ -47,4 +39,16 @@ dependencies {
     implementation 'androidx.core:core:1.9.0'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'com.google.android.material:material:1.11.0'
+}
+
+// Enforce JVM compatibility for all Kotlin and Java tasks
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
