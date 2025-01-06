@@ -10,6 +10,8 @@ plugins {
     id 'kotlin-android'
 }
 
+ext.kotlin_version = '1.8.10'
+
 android {
     namespace "yukams.app.background_locator_2"  // Make sure this matches with your references
     compileSdk 34  // Updated to latest
